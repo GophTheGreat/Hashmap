@@ -22,7 +22,16 @@ test('set', () => {
   hashmap.set('O', 'Cool')
   expect(hashmap.buckets[15].key).toBe('O')
   expect(hashmap.buckets[15].value).toBe('Cool')
+})
 
+
+test('get', () => {
+  let hashmap = new Hashmap();
+  hashmap.set('Modod', 'Monster')
   console.log(hashmap);
-  console.log(hashmap.buckets[15].next);
+  expect(hashmap.get('Modod')).toBe('Monster')
+  expect(hashmap.get('doo')).toBe(null);
+
+  hashmap.set('Chill', 'Screwby')
+  expect(hashmap.get('Chill')).toBe('Screwby')
 })

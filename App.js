@@ -29,7 +29,7 @@ class Hashmap {
   set(key, value) {
     const index = this.hash(key);
     const bucket = this.buckets[index];
-    let current = bucket[0];
+    let current = bucket;
 
     //walk through the linked list
     while(current) {
@@ -37,7 +37,7 @@ class Hashmap {
         current.value = value;
         return;
       }
-      cur = cur.next;
+      current = current.next;
     }
 
     //If we get past the previous step, we have a new key. Add a node.
@@ -49,6 +49,7 @@ class Hashmap {
     }
   }
 
+  //TODO
   resize() {
     const newCapacity = this.capacity * 2;
     const newBuckets = new Array(newCapacity).fill([]);
@@ -64,9 +65,18 @@ class Hashmap {
   }
 
   get(key) {
+    const index = this.hash(key);
+    const bucket = this.buckets[index];
+    let current = bucket;
+    //walk through the linked list
+    while(current) {
+      if(current.key === key){
+        return current.value;
+      }
+      current = current.next;
+    }
 
-
-    return value;
+    return null;
   }
 
   remove(key){
